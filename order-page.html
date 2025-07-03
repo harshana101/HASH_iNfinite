@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Now | HASH_iNfinite</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+      color: #ffffff;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="0.5" fill="%23ffffff" opacity="0.1"/><circle cx="80" cy="40" r="0.3" fill="%23ffffff" opacity="0.08"/><circle cx="40" cy="70" r="0.4" fill="%23ffffff" opacity="0.06"/><circle cx="90" cy="90" r="0.2" fill="%23ffffff" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+      pointer-events: none;
+      z-index: -1;
+      justify-content: center;
+      display: flex;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 30px;
+    }
+
+    .form-section {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 8px;
+      color: #cccccc;
+      font-weight: 600;
+    }
+
+    select,
+    input,
+    textarea,
+    button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #555;
+      font-size: 16px;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    select,
+    input,
+    textarea {
+      background: #2a2a2a;
+      color: #fff;
+      transition: border-color 0.3s ease;
+    }
+
+    select:focus,
+    input:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #999999;
+    }
+
+    label {
+      text-align: left;
+      margin-left: 10%;
+    }
+
+    /* Service dropdown styling */
+    #serviceType {
+      background: #2a2a2a;
+      color: #fff;
+      border: 1px solid #555;
+    }
+
+    #serviceType option {
+      background: #2a2a2a;
+      color: #fff;
+      padding: 10px;
+    }
+
+    .package-details {
+      background: #121212;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 15px;
+      border: 1px solid #555;
+    }
+
+    .package-details h3 {
+      color: #cccccc;
+      margin-bottom: 15px;
+    }
+
+    .package-details ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0;
+    }
+
+    .package-details li {
+      padding: 5px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .package-details li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #cccccc;
+      font-weight: bold;
+    }
+
+    .price {
+      font-size: 1.8rem;
+      color: #cccccc;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .add-ons-section {
+      background: #121212;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      border: 1px solid #555;
+    }
+
+    .add-on-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #555;
+    }
+
+    .add-on-item:last-child {
+      border-bottom: none;
+    }
+
+    .add-on-checkbox {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    .total-section {
+      color: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .total-section h3 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+
+    .required {
+      color: #999999;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .floating-shapes {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .shape {
+      position: absolute;
+      background: linear-gradient(45deg,
+          rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .shape:nth-child(1) {
+      width: 80px;
+      height: 80px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .shape:nth-child(2) {
+      width: 120px;
+      height: 120px;
+      top: 60%;
+      right: 10%;
+      animation-delay: 2s;
+    }
+
+    .shape:nth-child(3) {
+      width: 60px;
+      height: 60px;
+      bottom: 20%;
+      left: 30%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-20px) scale(1.1);
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Icon styling for dropdown options */
+    .service-icon {
+      margin-right: 8px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #ffffff1a, #ffffff33);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50px;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.8s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+    }
+
+    .cta-button i {
+      margin-right: 10px;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .cta-button:hover .fa-whatsapp {
+      color: #25d366;
+      transform: rotate(-10deg) scale(1.5);
+    }
+
+
+    /* Alert Dialog Styles */
+    .alert-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .alert-dialog {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .alert-icon {
+      width: 60px;
+      height: 60px;
+      background: #ff4757;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: white;
+      font-size: 24px;
+    }
+
+    .alert-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .alert-message {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .alert-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .alert-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s;
+      min-width: 80px;
+    }
+
+    .alert-btn-yes {
+      background: #bbbbbb;
+      color: rgb(54, 54, 54);
+    }
+
+    .alert-btn-yes:hover {
+      background: #8f8f8f;
+      transform: translateY(-1px);
+    }
+
+    .alert-btn-no {
+      background: #555555;
+      color: #ffffff;
+    }
+
+    .alert-btn-no:hover {
+      background: #808080;
+      transform: translateY(-1px);
+    }
+
+    .status-message {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .status-success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .status-info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    button {
+      background: #55555500;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+
+  <div class="container" style="justify-items : center;">
+    <h1><i class="fas fa-shopping-cart"></i> Book Now Your Package</h1>
+
+    <h3 style="margin-top: 3rem;">Package Details</h3>
+    <hr style="border: 1px solid #555; width: 55%; margin: 0 auto;">
+
+    <form id="orderForm">
+      <!-- Service Type Selection as Dropdown -->
+      <div style="display: inline-flex; flex-direction: row; justify-content: center; gap: 1rem;">
+        <div class="form-section">
+          <label for="serviceType">Service Type <span class="required">*</span></label>
+          <select id="serviceType" required>
+            <option value="">-- Select Service Type --</option>
+            <option value="photography">Photography</option>
+            <option value="videography">Videography</option>
+            <option value="music">Music</option>
+            <option value="graphic">Graphic Design</option>
+          </select>
+        </div>
+
+        <!-- Package Selection -->
+        <div class="form-section" style="text-align: left;">
+          <label for="package">Select Package <span class="required">*</span></label>
+          <select style="width: 80%; margin-left: 10%; " id="package" required>
+            <option value="">-- Choose Package --</option>
+          </select>
+
+          <div id="details" class="package-details" style="display:none;">
+            <h3 id="pkgTitle"></h3>
+            <ul id="pkgFeatures"></ul>
+            <div class="price" id="pkgPrice">LKR 0</div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Add-ons Section -->
+      <div id="addOnsSection" class="add-ons-section" style="display:none;">
+        <h3><i class="fas fa-plus"></i> Available Add-ons</h3>
+        <div id="addOnsList"></div>
+      </div>
+
+      <!-- Customer Details -->
+      <h3 style="margin-top: 3rem;">Customer Details</h3>
+      <hr style="border: 1px solid #555; width: 100%;  margin: 0 auto;">
+      <div class="form-section">
+        <label for="name">Full Name <span class="required">*</span></label>
+        <input type="text" id="name" required>
+      </div>
+
+      <div class="form-section">
+        <label for="email">Email Address <span class="required">*</span></label>
+        <input type="email" id="email" required>
+      </div>
+
+      <div class="form-section">
+        <label for="phone">Phone Number <span class="required">*</span></label>
+        <input type="tel" id="phone" required>
+      </div>
+
+      <div class="form-section">
+        <label for="eventDate">Event Date <span class="required">*</span></label>
+        <input type="date" id="eventDate" required>
+      </div>
+
+      <div class="form-section">
+        <label for="eventType">Event Type</label>
+        <select id="eventType">
+          <option value="">-- Select Event Type --</option>
+          <option value="Wedding">Wedding</option>
+          <option value="Birthday Party">Birthday Party</option>
+          <option value="Corporate Event">Corporate Event</option>
+          <option value="Music Recording">Music Recording</option>
+          <option value="Product Launch">Product Launch</option>
+          <option value="Graduation">Graduation</option>
+          <option value="Family Portrait">Family Portrait</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-section">
+        <label for="specialRequests">Special Requests / Notes</label>
+        <textarea id="specialRequests" placeholder="Any special requirements or additional information..."></textarea>
+      </div>
+
+      <!-- Total Section -->
+      <div id="totalSection" class="total-section" style="display:none;">
+        <h3>Total Amount: LKR <span id="totalAmount">0</span></h3>
+      </div>
+
+      <button type="submit" class="cta-button">
+        <i class="fab fa-whatsapp"></i> Send Order to WhatsApp
+      </button>
+      <button onclick="showDiscardAlert()"
+        style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem; color: #ffffff62;">
+        Discard Order
+      </button>
+    </form>
+  </div>
+
+  <!-- Alert Dialog -->
+  <div id="alertOverlay" class="alert-overlay">
+    <div class="alert-dialog">
+      <div class="alert-title">Discard Order?</div>
+      <div class="alert-message">
+        Are you sure you want to discard this order? This action cannot be undone and all order details will be lost.
+      </div>
+      <div class="alert-buttons">
+        <button class="alert-btn alert-btn-no" onclick="closeAlert()">No</button>
+        <button class="alert-btn alert-btn-yes" onclick="discardOrder()">Yes</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="statusMessage" class="status-message"></div>
+  </div>
+
+  <script>
+    const serviceData = {
+      photography: [
+        {
+          id: 'photo_basic',
+          name: 'Package I - Basic',
+          price: 12000,
+          features: ['2-hour session', '20 edited photos', 'Basic retouching', 'Digital delivery']
+        },
+        {
+          id: 'photo_enhanced',
+          name: 'Package I+ - Enhanced',
+          price: 18000,
+          features: ['3-hour session', '30 edited photos', 'Basic retouching + color correction', 'Digital delivery + online gallery', '5 additional raw files']
+        },
+        {
+          id: 'photo_professional',
+          name: 'Package II - Professional',
+          price: 45000,
+          features: ['4-hour session', '50 edited photos', 'Advanced retouching', 'Print release included', 'USB drive delivery']
+        },
+        {
+          id: 'photo_extended',
+          name: 'Package II+ - Extended',
+          price: 65000,
+          features: ['6-hour session', '75 edited photos', 'Advanced retouching + skin smoothing', 'Print release + commercial license', 'Custom USB + online portfolio', 'Second location included']
+        },
+        {
+          id: 'photo_ultimate',
+          name: 'Package III - Ultimate',
+          price: 95000,
+          features: ['Full day coverage', '100+ edited photos', 'Video highlights', 'Premium album included', 'Second photographer']
+        },
+        {
+          id: 'photo_wedding',
+          name: 'Wedding Complete',
+          price: 150000,
+          features: ['12-hour coverage', '200+ edited photos', 'Cinematic video highlights', 'Premium leather album', 'Two photographers + assistant', 'Engagement session included', 'Same-day preview']
+        }
+      ],
+      videography: [
+        {
+          id: 'video_basic',
+          name: 'Basic Video Package',
+          price: 35000,
+          features: ['2-hour shooting', 'Basic editing', '1-3 minute final video', 'HD 1080p delivery', 'Background music included']
+        },
+        {
+          id: 'video_professional',
+          name: 'Professional Video',
+          price: 75000,
+          features: ['4-hour shooting', 'Advanced editing + transitions', '5-8 minute final video', '4K delivery + HD backup', 'Custom music + sound design', 'Color grading included']
+        },
+        {
+          id: 'video_cinematic',
+          name: 'Cinematic Package',
+          price: 120000,
+          features: ['Full day shooting', 'Cinematic editing + effects', '10-15 minute feature', '4K + Raw footage', 'Professional audio recording', 'Drone footage included', 'Multiple camera angles']
+        },
+        {
+          id: 'video_event',
+          name: 'Event Coverage',
+          price: 50000,
+          features: ['6-hour event coverage', 'Highlight reel (3-5 minutes)', 'Full ceremony footage', 'Multiple camera setup', 'Live streaming option']
+        }
+      ],
+      music: [
+        {
+          id: 'music_demo',
+          name: 'Demo Package',
+          price: 15000,
+          features: ['1-hour recording session', '1 demo track', 'Basic mixing', 'MP3 delivery']
+        },
+        {
+          id: 'music_solo',
+          name: 'Solo Artist Package',
+          price: 25000,
+          features: ['2-hour recording session', '1 professionally mixed track', 'Basic mastering', 'MP3 + WAV delivery']
+        },
+        {
+          id: 'music_single',
+          name: 'Single Release',
+          price: 40000,
+          features: ['3-hour studio session', '1 radio-ready single', 'Professional mixing & mastering', 'High-quality formats', 'Basic cover art']
+        },
+        {
+          id: 'music_band',
+          name: 'Band Package',
+          price: 50000,
+          features: ['4-hour studio session', 'Up to 3 tracks', 'Multi-track recording & mixing', 'Basic mastering', 'Session musicians available']
+        },
+        {
+          id: 'music_ep',
+          name: 'EP Package',
+          price: 80000,
+          features: ['8-hour studio access', '4-5 tracks', 'Professional mixing & mastering', 'Custom cover art', 'Digital distribution prep']
+        },
+        {
+          id: 'music_production',
+          name: 'Full Production Package',
+          price: 100000,
+          features: ['Full day studio access', 'Up to 5 tracks', 'Professional mixing & mastering', 'Cover art design + digital release', 'Music video consultation']
+        },
+        {
+          id: 'music_album',
+          name: 'Full Album Production',
+          price: 200000,
+          features: ['Multiple studio sessions', '8-12 tracks', 'Complete production package', 'Professional mastering', 'Album artwork & design', 'Music video included', 'Distribution & promotion support']
+        }
+      ],
+      graphic: [
+        {
+          id: 'graphic_basic',
+          name: 'Basic Design Package',
+          price: 5000,
+          features: ['Simple Logo Design', '2 concept variations', '2 revisions included', 'PNG/JPG delivery']
+        },
+        {
+          id: 'graphic_standard',
+          name: 'Standard Design Services',
+          price: 8000,
+          features: ['Logo Design - LKR 8,000', 'Business Card - LKR 3,500', 'Flyer/Poster - LKR 5,000', 'Social Media Post - LKR 2,500', 'Brochure (Tri-fold) - LKR 7,500']
+        },
+        {
+          id: 'graphic_social',
+          name: 'Social Media Package',
+          price: 15000,
+          features: ['10 social media posts', 'Instagram story templates', 'Facebook cover design', 'Consistent branding', 'Multiple format delivery']
+        },
+        {
+          id: 'graphic_branding',
+          name: 'Professional Branding',
+          price: 25000,
+          features: ['Complete logo suite', 'Business card design', 'Letterhead + envelope', 'Brand guidelines', 'Color palette + typography']
+        },
+        {
+          id: 'graphic_print',
+          name: 'Print Package',
+          price: 20000,
+          features: ['Menu design', 'Catalog/brochure (8-12 pages)', 'Poster series (3 designs)', 'Print-ready files', 'Multiple size variations']
+        },
+        {
+          id: 'graphic_identity',
+          name: 'Complete Brand Identity',
+          price: 45000,
+          features: ['Premium logo + variations', 'Complete stationery suite', 'Brand manual + guidelines', 'Social media templates', 'Website design mockup', 'Packaging design concept']
+        },
+        {
+          id: 'graphic_enterprise',
+          name: 'Full Brand Ecosystem',
+          price: 75000,
+          features: ['Complete brand identity', 'Marketing collateral suite', 'Digital & print templates', 'Brand implementation guide', 'Signage & environmental design', '3-month design support']
+        }
+      ]
+    };
+
+    const addOnsData = {
+      photography: [
+        { name: 'Extra Hour', price: 5000 },
+        { name: 'Second Photographer', price: 15000 },
+        { name: 'Premium Album', price: 10000 },
+        { name: 'Drone Photography', price: 8000 },
+        { name: 'Same Day Preview', price: 5000 }
+      ],
+      videography: [
+        { name: 'Extra Hour Shooting', price: 8000 },
+        { name: 'Drone Footage', price: 12000 },
+        { name: 'Additional Camera Angle', price: 10000 },
+        { name: 'Live Streaming', price: 15000 },
+        { name: 'Raw Footage Delivery', price: 5000 }
+      ],
+      music: [
+        { name: 'Extra Hour Studio Time', price: 3000 },
+        { name: 'Additional Track', price: 8000 },
+        { name: 'Session Musician', price: 5000 },
+        { name: 'Music Video Basic', price: 25000 },
+        { name: 'Digital Distribution', price: 3000 }
+      ],
+      graphic: [
+        { name: 'Rush Delivery (24hrs)', price: 2000 },
+        { name: 'Extra Revision Round', price: 1000 },
+        { name: 'Source Files (AI/PSD)', price: 1500 },
+        { name: 'Print Coordination', price: 2500 },
+        { name: 'Social Media Adaptation', price: 3000 }
+      ]
+    };
+
+    let currentService = '';
+    let selectedAddOns = [];
+
+    // DOM Elements
+    const serviceTypeSelect = document.getElementById('serviceType');
+    const packageSelect = document.getElementById('package');
+    const detailsBox = document.getElementById('details');
+    const pkgTitle = document.getElementById('pkgTitle');
+    const pkgFeatures = document.getElementById('pkgFeatures');
+    const pkgPrice = document.getElementById('pkgPrice');
+    const addOnsSection = document.getElementById('addOnsSection');
+    const addOnsList = document.getElementById('addOnsList');
+    const totalSection = document.getElementById('totalSection');
+    const totalAmount = document.getElementById('totalAmount');
+
+    // Service Type Selection
+    serviceTypeSelect.addEventListener('change', () => {
+      currentService = serviceTypeSelect.value;
+      if (currentService) {
+        loadPackages(currentService);
+        loadAddOns(currentService);
+      } else {
+        packageSelect.innerHTML = '<option value="">-- Choose Package --</option>';
+        resetSelection();
+      }
+    });
+
+    // Load packages for selected service
+    function loadPackages(service) {
+      packageSelect.innerHTML = '<option value="">-- Choose Package --</option>';
+      serviceData[service].forEach(pkg => {
+        const option = document.createElement('option');
+        option.value = pkg.id;
+        option.textContent = `${pkg.name} - LKR ${pkg.price.toLocaleString()}`;
+        packageSelect.appendChild(option);
+      });
+    }
+
+    // Load add-ons for selected service
+    function loadAddOns(service) {
+      addOnsList.innerHTML = '';
+      addOnsData[service].forEach((addon, index) => {
+        const addOnDiv = document.createElement('div');
+        addOnDiv.className = 'add-on-item';
+        addOnDiv.innerHTML = `
+          <div>
+            <input type="checkbox" class="add-on-checkbox" id="addon_${index}" data-name="${addon.name}" data-price="${addon.price}">
+            <label for="addon_${index}" style="display: inline; margin: 0;">${addon.name}</label>
+          </div>
+          <span>LKR ${addon.price.toLocaleString()}</span>
+        `;
+        addOnsList.appendChild(addOnDiv);
+      });
+
+      // Add event listeners to checkboxes
+      document.querySelectorAll('.add-on-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', updateTotal);
+      });
+    }
+
+    // Package selection
+    packageSelect.addEventListener('change', () => {
+      const selectedPackage = serviceData[currentService]?.find(p => p.id === packageSelect.value);
+      if (selectedPackage) {
+        pkgTitle.textContent = selectedPackage.name;
+        pkgPrice.textContent = `LKR ${selectedPackage.price.toLocaleString()}`;
+        pkgFeatures.innerHTML = selectedPackage.features.map(f => `<li>${f}</li>`).join('');
+        detailsBox.style.display = 'block';
+        addOnsSection.style.display = 'block';
+        updateTotal();
+      } else {
+        detailsBox.style.display = 'none';
+        addOnsSection.style.display = 'none';
+        totalSection.style.display = 'none';
+      }
+    });
+
+    // Update total calculation
+    function updateTotal() {
+      const selectedPackage = serviceData[currentService]?.find(p => p.id === packageSelect.value);
+      if (!selectedPackage) return;
+
+      let total = selectedPackage.price;
+      selectedAddOns = [];
+
+      document.querySelectorAll('.add-on-checkbox:checked').forEach(checkbox => {
+        const addonPrice = parseInt(checkbox.dataset.price);
+        const addonName = checkbox.dataset.name;
+        total += addonPrice;
+        selectedAddOns.push({ name: addonName, price: addonPrice });
+      });
+
+      totalAmount.textContent = total.toLocaleString();
+      totalSection.style.display = 'block';
+    }
+
+    // Reset selection
+    function resetSelection() {
+      packageSelect.value = '';
+      detailsBox.style.display = 'none';
+      addOnsSection.style.display = 'none';
+      totalSection.style.display = 'none';
+      document.querySelectorAll('.add-on-checkbox').forEach(cb => cb.checked = false);
+      selectedAddOns = [];
+    }
+
+    // Form submission
+    document.getElementById('orderForm').addEventListener('submit', e => {
+      e.preventDefault();
+
+      if (!currentService) {
+        return alert('Please select a service type.');
+      }
+
+      const selectedPackage = serviceData[currentService].find(p => p.id === packageSelect.value);
+      if (!selectedPackage) return alert('Please select a package.');
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const eventDate = document.getElementById('eventDate').value;
+      const eventType = document.getElementById('eventType').value || 'Not specified';
+      const specialRequests = document.getElementById('specialRequests').value;
+
+      // Calculate total
+      let total = selectedPackage.price;
+      selectedAddOns.forEach(addon => total += addon.price);
+
+      // Format current date and time
+      const now = new Date();
+      const currentDate = now.toLocaleDateString('en-GB');
+      const currentTime = now.toLocaleTimeString('en-GB', { hour12: false });
+
+      // Build WhatsApp message
+      let message = `*NEW ORDER REQUEST*\n\n`;
+
+      message += `> *Customer Details:*\n`;
+      message += `- Name: ${name}\n`;
+      message += `- Email: ${email}\n`;
+      message += `- Phone: ${phone}\n`;
+      message += `- Event Date: ${eventDate}\n`;
+      message += `- Event Type: ${eventType}\n\n`;
+
+      message += `> *Service Details:*\n`;
+      message += `- Service: ${currentService.charAt(0).toUpperCase() + currentService.slice(1)}\n`;
+      message += `- Package: ${selectedPackage.name}\n`;
+      message += `- Package Price: LKR ${selectedPackage.price.toLocaleString()}\n\n`;
+
+      if (selectedAddOns.length > 0) {
+        message += `> *Add-ons:*\n`;
+        selectedAddOns.forEach(addon => {
+          message += `- ${addon.name} - LKR ${addon.price.toLocaleString()}\n`;
+        });
+        message += `\n`;
+        message += `--------------------------------------\n`;
+      }
+
+      message += `*Total: LKR ${total.toLocaleString()}*\n`;
+      message += `--------------------------------------\n--------------------------------------\n\n`;
+
+      if (specialRequests.trim()) {
+        message += `> *Special Requests:*\n${specialRequests}\n\n`;
+      }
+
+      message += `- Order submitted on: ${currentDate}\n`;
+      message += `- Time: ${currentTime}`;
+
+      const whatsappLink = `https://wa.me/94762728595?text=${encodeURIComponent(message)}`;
+      window.open(whatsappLink, '_blank');
+    });
+
+    // Set minimum date to today
+    document.getElementById('eventDate').min = new Date().toISOString().split('T')[0];
+    // --------------------------------------------------------------------------------------------------------------
+    // --------------------------------------------------------------------------------------------------------------
+
+
+    // Alert for discard order
+
+    function showDiscardAlert() {
+      const overlay = document.getElementById('alertOverlay');
+      overlay.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+
+    function closeAlert() {
+      const overlay = document.getElementById('alertOverlay');
+      const statusMessage = document.getElementById('statusMessage');
+
+      overlay.style.display = 'none';
+      document.body.style.overflow = 'auto';
+
+      // Show cancellation message
+      statusMessage.className = 'status-message status-info';
+      statusMessage.style.display = 'block';
+      statusMessage.textContent = 'Order discard cancelled. Your order is safe.';
+
+      // Hide message after 3 seconds
+      setTimeout(() => {
+        statusMessage.style.display = 'none';
+      }, 3000);
+    }
+
+    function discardOrder() {
+      const overlay = document.getElementById('alertOverlay');
+      const statusMessage = document.getElementById('statusMessage');
+
+      overlay.style.display = 'none';
+      document.body.style.overflow = 'auto';
+
+      // Show success message briefly
+      statusMessage.className = 'status-message status-success';
+      statusMessage.style.display = 'block';
+      statusMessage.textContent = 'Order discarded successfully. Redirecting to home page...';
+
+      // Navigate to index.html after a brief delay
+      setTimeout(() => {
+        window.location.href = './index.html';
+      }, 1500);
+    }
+
+    // Close alert when clicking outside the dialog
+    document.getElementById('alertOverlay').addEventListener('click', function (e) {
+      if (e.target === this) {
+        closeAlert();
+      }
+    });
+
+    // Close alert with Escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        const overlay = document.getElementById('alertOverlay');
+        if (overlay.style.display === 'flex') {
+          closeAlert();
+        }
+      }
+    });
+
+  </script>
+</body>
+
+</html>
