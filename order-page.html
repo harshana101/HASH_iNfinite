@@ -533,9 +533,7 @@
       <button type="submit" class="cta-button">
         <i class="fab fa-whatsapp"></i> Send Order to WhatsApp
       </button>
-      <button onclick="showDiscardAlert()"
-        style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem; color: #ffffff62;">
-        Discard Order
+      <button onclick="showDiscardAlert()" style="margin-top: 0.5rem; text-align: center; font-size: 0.9rem; color: #ffffff62;"> Discard Order
       </button>
     </form>
   </div>
@@ -902,8 +900,7 @@
       }
 
       message += `*Total: LKR ${total.toLocaleString()}*\n`;
-      message += `--------------------------------------\n--------------------------------------\n\n`;
-
+      message += `======================================\n\n`;
       if (specialRequests.trim()) {
         message += `> *Special Requests:*\n${specialRequests}\n\n`;
       }

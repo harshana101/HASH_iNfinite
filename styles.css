@@ -765,3 +765,11 @@ body::before {
     display: flex;
   }
 }
+
+.feedback {
+  background: #9b9b9b2f;
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius:10px;
+  width: 300px;
+}
