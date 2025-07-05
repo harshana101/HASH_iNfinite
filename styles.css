@@ -29,8 +29,8 @@ body::before {
   position: fixed;
   top: 0;
   width: 100%;
-  background: rgba(10, 10, 10, 0.9);
-  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.075);
+  backdrop-filter: blur(60px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   z-index: 1000;
   padding: 1rem 2rem;
@@ -120,10 +120,7 @@ body::before {
 .cta-button {
   display: inline-block;
   padding: 1rem 2rem;
-  background: linear-gradient(
-    45deg,
-    #ffffff1a,
-    #ffffff33 );
+  background: linear-gradient(45deg, #ffffff1a, #ffffff33);
   border: 2px solid rgba(255, 255, 255, 0.3);
   border-radius: 50px;
   color: #ffffff;
@@ -232,25 +229,25 @@ body::before {
 }
 
 .graphic strong {
-    float: right;
+  float: right;
 }
 
 .label {
-    position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
-    padding: 0.3rem 0.6rem;
-    border-radius: 0.5rem;
-    font-size: 0.75rem;
-    font-weight: bold;
-    color: white;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    box-shadow: 0 0 10px #ffffff20;
-    border: 1px solid #ffffff20;
-    backdrop-filter: blur(20px);
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 0 10px #ffffff20;
+  border: 1px solid #ffffff20;
+  backdrop-filter: blur(20px);
 }
 
 .label-label {
@@ -270,7 +267,6 @@ body::before {
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
-
 
 .tabs {
   display: flex;
@@ -320,14 +316,16 @@ body::before {
   margin-bottom: 1rem;
 }
 
-.sub-nav, .sub-nav2 {
+.sub-nav,
+.sub-nav2 {
   display: flex;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
 }
 
-.sub-nav a, .sub-nav2 a {
+.sub-nav a,
+.sub-nav2 a {
   color: #ffffff;
   text-decoration: none;
   padding: 0.5rem 1rem;
@@ -336,7 +334,8 @@ body::before {
   transition: all 0.3s ease;
 }
 
-.sub-nav a:hover, .sub-nav2 a:hover {
+.sub-nav a:hover,
+.sub-nav2 a:hover {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
@@ -366,7 +365,6 @@ body::before {
   box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
-
 
 .team-member {
   background: rgba(255, 255, 255, 0.05);
@@ -746,19 +744,16 @@ body::before {
   }
 
   .nav-menu {
-    justify-content: center;
-    flex-direction: row;
-    position: absolute;
-    top: 90px;
-    right: 20px;
-    background-color: transparent;
-    width: auto;
-    display: none;
-    text-align: center;
-  }
-
-  .nav-item {
-    margin-bottom: 0.5rem;
+  position: absolute;
+  top: 5rem;
+  width: auto;
+  background: rgba(0, 0, 0, 0.938);
+  backdrop-filter: blur(60px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+  padding: 1rem 2rem;
+  transition: all 0.3s ease;
+  display: none;
   }
 
   .nav-menu.active {
@@ -766,10 +761,13 @@ body::before {
   }
 }
 
-.feedback {
-  background: #9b9b9b2f;
-  backdrop-filter: blur(10px);
-  padding: 20px;
-  border-radius:10px;
-  width: 300px;
+.feedback-crd {
+  bottom: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
